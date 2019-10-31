@@ -132,6 +132,7 @@ public class TicketInfoController {
         ResponseResult<List<TicketInfo>> responseResult = new ResponseResult<List<TicketInfo>>();
         List<TicketInfo> list = ticketInfoService.selectTicketInfoByUser(userInfo,ticketInfo,trainInfo);
         responseResult.setData(list);
+
         return responseResult;
     }
 
