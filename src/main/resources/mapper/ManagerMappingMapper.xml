@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ManagerMappingMapper" >
+  <resultMap id="BaseResultMap" type="entity.ManagerMapping" >
+    <id column="ticket_num" property="ticketNum" jdbcType="VARCHAR" />
+    <result column="work_id" property="workId" jdbcType="VARCHAR" />
+    <result column="sell_time" property="sellTime" jdbcType="TIMESTAMP" />
+    <result column="sell_add" property="sellAdd" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ticket_num, work_id, sell_time, sell_add
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from manager_mapping
+    where ticket_num = #{ticketNum,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from manager_mapping
+    where ticket_num = #{ticketNum,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.ManagerMapping" >
+    insert into manager_mapping (ticket_num, work_id, sell_time, 
+      sell_add)
+    values (#{ticketNum,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, #{sellTime,jdbcType=TIMESTAMP}, 
+      #{sellAdd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.ManagerMapping" >
+    insert into manager_mapping
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ticketNum != null" >
+        ticket_num,
+      </if>
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="sellTime != null" >
+        sell_time,
+      </if>
+      <if test="sellAdd != null" >
+        sell_add,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ticketNum != null" >
+        #{ticketNum,jdbcType=VARCHAR},
+      </if>
+      <if test="workId != null" >
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellTime != null" >
+        #{sellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellAdd != null" >
+        #{sellAdd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.ManagerMapping" >
+    update manager_mapping
+    <set >
+      <if test="workId != null" >
+        work_id = #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellTime != null" >
+        sell_time = #{sellTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sellAdd != null" >
+        sell_add = #{sellAdd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ticket_num = #{ticketNum,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.ManagerMapping" >
+    update manager_mapping
+    set work_id = #{workId,jdbcType=VARCHAR},
+      sell_time = #{sellTime,jdbcType=TIMESTAMP},
+      sell_add = #{sellAdd,jdbcType=VARCHAR}
+    where ticket_num = #{ticketNum,jdbcType=VARCHAR}
+  </update>
+</mapper>

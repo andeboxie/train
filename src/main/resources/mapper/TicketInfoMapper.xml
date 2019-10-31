@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TicketInfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.TicketInfo" >
+    <id column="ticket_id" property="ticketId" jdbcType="VARCHAR" />
+    <result column="carr_number" property="carrNumber" jdbcType="VARCHAR" />
+    <result column="Seat_number" property="seatNumber" jdbcType="VARCHAR" />
+    <result column="train_id" property="trainId" jdbcType="VARCHAR" />
+    <result column="t_date" property="tDate" jdbcType="TIMESTAMP" />
+    <result column="seat_type" property="seatType" jdbcType="VARCHAR" />
+    <result column="ticket_state" property="ticketState" jdbcType="VARCHAR" />
+    <result column="id_no" property="idNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ticket_id, carr_number, Seat_number, train_id, t_date, seat_type, ticket_state, id_no
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ticket_info
+    where ticket_id = #{ticketId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ticket_info
+    where ticket_id = #{ticketId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.TicketInfo" >
+    insert into ticket_info (ticket_id, carr_number, Seat_number, 
+      train_id, t_date, seat_type, 
+      ticket_state, id_no)
+    values (#{ticketId,jdbcType=VARCHAR}, #{carrNumber,jdbcType=VARCHAR}, #{seatNumber,jdbcType=VARCHAR}, 
+      #{trainId,jdbcType=VARCHAR}, #{tDate,jdbcType=TIMESTAMP}, #{seatType,jdbcType=VARCHAR}, 
+      #{ticketState,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.TicketInfo" >
+    insert into ticket_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ticketId != null" >
+        ticket_id,
+      </if>
+      <if test="carrNumber != null" >
+        carr_number,
+      </if>
+      <if test="seatNumber != null" >
+        Seat_number,
+      </if>
+      <if test="trainId != null" >
+        train_id,
+      </if>
+      <if test="tDate != null" >
+        t_date,
+      </if>
+      <if test="seatType != null" >
+        seat_type,
+      </if>
+      <if test="ticketState != null" >
+        ticket_state,
+      </if>
+      <if test="idNo != null" >
+        id_no,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ticketId != null" >
+        #{ticketId,jdbcType=VARCHAR},
+      </if>
+      <if test="carrNumber != null" >
+        #{carrNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null" >
+        #{seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="trainId != null" >
+        #{trainId,jdbcType=VARCHAR},
+      </if>
+      <if test="tDate != null" >
+        #{tDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seatType != null" >
+        #{seatType,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketState != null" >
+        #{ticketState,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.TicketInfo" >
+    update ticket_info
+    <set >
+      <if test="carrNumber != null" >
+        carr_number = #{carrNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="seatNumber != null" >
+        Seat_number = #{seatNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="trainId != null" >
+        train_id = #{trainId,jdbcType=VARCHAR},
+      </if>
+      <if test="tDate != null" >
+        t_date = #{tDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="seatType != null" >
+        seat_type = #{seatType,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketState != null" >
+        ticket_state = #{ticketState,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        id_no = #{idNo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ticket_id = #{ticketId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.TicketInfo" >
+    update ticket_info
+    set carr_number = #{carrNumber,jdbcType=VARCHAR},
+      Seat_number = #{seatNumber,jdbcType=VARCHAR},
+      train_id = #{trainId,jdbcType=VARCHAR},
+      t_date = #{tDate,jdbcType=TIMESTAMP},
+      seat_type = #{seatType,jdbcType=VARCHAR},
+      ticket_state = #{ticketState,jdbcType=VARCHAR},
+      id_no = #{idNo,jdbcType=VARCHAR}
+    where ticket_id = #{ticketId,jdbcType=VARCHAR}
+  </update>
+</mapper>

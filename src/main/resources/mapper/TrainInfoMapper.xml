@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.TrainInfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.TrainInfo" >
+    <id column="train_id" property="trainId" jdbcType="VARCHAR" />
+    <result column="start_stop" property="startStop" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="VARCHAR" />
+    <result column="end_stop" property="endStop" jdbcType="VARCHAR" />
+    <result column="end_time" property="endTime" jdbcType="VARCHAR" />
+    <result column="totallegend" property="totallegend" jdbcType="INTEGER" />
+    <result column="train_type" property="trainType" jdbcType="VARCHAR" />
+    <result column="line_info" property="lineInfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    train_id, start_stop, start_time, end_stop, end_time, totallegend, train_type, line_info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from train_info
+    where train_id = #{trainId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from train_info
+    where train_id = #{trainId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.TrainInfo" >
+    insert into train_info (train_id, start_stop, start_time, 
+      end_stop, end_time, totallegend, 
+      train_type, line_info)
+    values (#{trainId,jdbcType=VARCHAR}, #{startStop,jdbcType=VARCHAR}, #{startTime,jdbcType=VARCHAR}, 
+      #{endStop,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{totallegend,jdbcType=INTEGER}, 
+      #{trainType,jdbcType=VARCHAR}, #{lineInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.TrainInfo" >
+    insert into train_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trainId != null" >
+        train_id,
+      </if>
+      <if test="startStop != null" >
+        start_stop,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endStop != null" >
+        end_stop,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="totallegend != null" >
+        totallegend,
+      </if>
+      <if test="trainType != null" >
+        train_type,
+      </if>
+      <if test="lineInfo != null" >
+        line_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trainId != null" >
+        #{trainId,jdbcType=VARCHAR},
+      </if>
+      <if test="startStop != null" >
+        #{startStop,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endStop != null" >
+        #{endStop,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="totallegend != null" >
+        #{totallegend,jdbcType=INTEGER},
+      </if>
+      <if test="trainType != null" >
+        #{trainType,jdbcType=VARCHAR},
+      </if>
+      <if test="lineInfo != null" >
+        #{lineInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.TrainInfo" >
+    update train_info
+    <set >
+      <if test="startStop != null" >
+        start_stop = #{startStop,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=VARCHAR},
+      </if>
+      <if test="endStop != null" >
+        end_stop = #{endStop,jdbcType=VARCHAR},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=VARCHAR},
+      </if>
+      <if test="totallegend != null" >
+        totallegend = #{totallegend,jdbcType=INTEGER},
+      </if>
+      <if test="trainType != null" >
+        train_type = #{trainType,jdbcType=VARCHAR},
+      </if>
+      <if test="lineInfo != null" >
+        line_info = #{lineInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where train_id = #{trainId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.TrainInfo" >
+    update train_info
+    set start_stop = #{startStop,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=VARCHAR},
+      end_stop = #{endStop,jdbcType=VARCHAR},
+      end_time = #{endTime,jdbcType=VARCHAR},
+      totallegend = #{totallegend,jdbcType=INTEGER},
+      train_type = #{trainType,jdbcType=VARCHAR},
+      line_info = #{lineInfo,jdbcType=VARCHAR}
+    where train_id = #{trainId,jdbcType=VARCHAR}
+  </update>
+</mapper>

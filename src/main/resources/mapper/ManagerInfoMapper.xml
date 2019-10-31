@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.ManagerInfoMapper" >
+  <resultMap id="BaseResultMap" type="entity.ManagerInfo" >
+    <id column="work_id" property="workId" jdbcType="VARCHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
+    <result column="work_account" property="workAccount" jdbcType="VARCHAR" />
+    <result column="work_pwd" property="workPwd" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    work_id, work_name, work_account, work_pwd
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from manager_info
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from manager_info
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.ManagerInfo" >
+    insert into manager_info (work_id, work_name, work_account, 
+      work_pwd)
+    values (#{workId,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, #{workAccount,jdbcType=VARCHAR}, 
+      #{workPwd,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.ManagerInfo" >
+    insert into manager_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="workId != null" >
+        work_id,
+      </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
+      <if test="workAccount != null" >
+        work_account,
+      </if>
+      <if test="workPwd != null" >
+        work_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="workId != null" >
+        #{workId,jdbcType=VARCHAR},
+      </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAccount != null" >
+        #{workAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="workPwd != null" >
+        #{workPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.ManagerInfo" >
+    update manager_info
+    <set >
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
+      <if test="workAccount != null" >
+        work_account = #{workAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="workPwd != null" >
+        work_pwd = #{workPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.ManagerInfo" >
+    update manager_info
+    set work_name = #{workName,jdbcType=VARCHAR},
+      work_account = #{workAccount,jdbcType=VARCHAR},
+      work_pwd = #{workPwd,jdbcType=VARCHAR}
+    where work_id = #{workId,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="dao.PriceMapper" >
+  <resultMap id="BaseResultMap" type="entity.Price" >
+    <id column="price_id" property="priceId" jdbcType="VARCHAR" />
+    <result column="train_type" property="trainType" jdbcType="VARCHAR" />
+    <result column="seat_type" property="seatType" jdbcType="VARCHAR" />
+    <result column="perprice" property="perprice" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    price_id, train_type, seat_type, perprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from price
+    where price_id = #{priceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from price
+    where price_id = #{priceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="entity.Price" >
+    insert into price (price_id, train_type, seat_type, 
+      perprice)
+    values (#{priceId,jdbcType=VARCHAR}, #{trainType,jdbcType=VARCHAR}, #{seatType,jdbcType=VARCHAR}, 
+      #{perprice,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="entity.Price" >
+    insert into price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="priceId != null" >
+        price_id,
+      </if>
+      <if test="trainType != null" >
+        train_type,
+      </if>
+      <if test="seatType != null" >
+        seat_type,
+      </if>
+      <if test="perprice != null" >
+        perprice,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="priceId != null" >
+        #{priceId,jdbcType=VARCHAR},
+      </if>
+      <if test="trainType != null" >
+        #{trainType,jdbcType=VARCHAR},
+      </if>
+      <if test="seatType != null" >
+        #{seatType,jdbcType=VARCHAR},
+      </if>
+      <if test="perprice != null" >
+        #{perprice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="entity.Price" >
+    update price
+    <set >
+      <if test="trainType != null" >
+        train_type = #{trainType,jdbcType=VARCHAR},
+      </if>
+      <if test="seatType != null" >
+        seat_type = #{seatType,jdbcType=VARCHAR},
+      </if>
+      <if test="perprice != null" >
+        perprice = #{perprice,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where price_id = #{priceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="entity.Price" >
+    update price
+    set train_type = #{trainType,jdbcType=VARCHAR},
+      seat_type = #{seatType,jdbcType=VARCHAR},
+      perprice = #{perprice,jdbcType=DECIMAL}
+    where price_id = #{priceId,jdbcType=VARCHAR}
+  </update>
+</mapper>
